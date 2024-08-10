@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Search Engine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('background.jpg') no-repeat center center fixed; /* Background image */
+            background-size: cover;
+            color: #e0e0e0; /* Light text color */
+        }
+        .search-container {
+            text-align: center;
+            background-color: rgba(30, 30, 30, 0.8); /* Semi-transparent dark background */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        .search-container img {
+            width: 150px; /* Adjust size as needed */
+            margin-bottom: 20px;
+        }
+        .search-container h1 {
+            margin: 0 0 20px;
+            font-size: 24px;
+            color: #e0e0e0; /* Light text color */
+        }
+        .search-container input[type="text"] {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: #333; /* Dark input background */
+            color: #e0e0e0; /* Light text color */
+        }
+        .search-container input[type="text"]::placeholder {
+            color: #888; /* Placeholder text color */
+        }
+        .search-container input[type="submit"] {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background-color: #3a3a3a; /* Dark button background */
+            color: #e0e0e0; /* Light text color */
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .search-container input[type="submit"]:hover {
+            background-color: #555; /* Slightly lighter on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <img src="logo.png" alt="Logo"> <!-- Logo -->
+        <h1>Google Search</h1>
+        <form action="https://www.google.com/search" method="get">
+            <input type="text" name="q" placeholder="Search Google...">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+</body>
+</html>
