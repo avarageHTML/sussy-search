@@ -3,71 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Search Engine</title>
+    <title>Sussy Search</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #121212;
+            color: #e0e0e0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            background: url('background.jpg') no-repeat center center fixed; /* Background image */
-            background-size: cover;
-            color: #e0e0e0; /* Light text color */
+            overflow: hidden;
         }
         .search-container {
-            text-align: center;
-            background-color: rgba(30, 30, 30, 0.8); /* Semi-transparent dark background */
-            padding: 30px;
+            background: #1f1f1f;
             border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            transition: all 0.3s ease;
         }
-        .search-container img {
-            width: 150px; /* Adjust size as needed */
+        .logo {
+            width: 100px;
+            height: auto;
             margin-bottom: 20px;
         }
-        .search-container h1 {
-            margin: 0 0 20px;
-            font-size: 24px;
-            color: #e0e0e0; /* Light text color */
+        .logo svg {
+            fill: #1e90ff;
         }
-        .search-container input[type="text"] {
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             width: 100%;
-            max-width: 400px;
+        }
+        .search-form select, .search-form input[type="text"] {
+            width: 100%;
+            max-width: 500px;
+            margin: 10px;
             padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #333;
             border-radius: 8px;
-            background-color: #333; /* Dark input background */
-            color: #e0e0e0; /* Light text color */
+            border: 1px solid #444;
+            background: #333;
+            color: #e0e0e0;
         }
-        .search-container input[type="text"]::placeholder {
-            color: #888; /* Placeholder text color */
-        }
-        .search-container input[type="submit"] {
+        .search-form input[type="submit"] {
             padding: 12px 24px;
             border: none;
             border-radius: 8px;
-            background-color: #3a3a3a; /* Dark button background */
-            color: #e0e0e0; /* Light text color */
-            font-size: 16px;
+            background: #1e90ff;
+            color: #ffffff;
             cursor: pointer;
-            transition: background-color 0.3s;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
-        .search-container input[type="submit"]:hover {
-            background-color: #555; /* Slightly lighter on hover */
+        .search-form input[type="submit"]:hover {
+            background: #1c86ee;
+        }
+        .tab-content {
+            width: 100%;
+            height: 80vh; /* Adjust height as needed */
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            transition: opacity 0.5s ease;
+        }
+        iframe.hidden {
+            opacity: 0;
+        }
+        iframe.visible {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
     <div class="search-container">
-        <img src="logo.png" alt="Logo"> <!-- Logo -->
-        <h1>Google Search</h1>
-        <form action="https://www.google.com/search" method="get">
-            <input type="text" name="q" placeholder="Search Google...">
-            <input type="submit" value="Search">
-        </form>
+        <div class="logo">
+            <!-- Simple SVG Logo -->
+            <svg width="100" height="100" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="#1e90ff" stroke-width="2" fill="none"/>
+                <path d="M12 6v6l4 2" stroke="#1e90ff" stroke-width="2" fill="none"/>
+            </svg>
+        </div>
+        <h1>Sussy Search</h1>
+        <div class="search-form">
+            <form id="searchForm" onsubmit="return performSearch()">
+                <select id="siteSelect">
+                    <option value="https://www.bing.com/search?q=">Bing</option>
+                    <option value="https://">???</option>
+                </select>
+                <input type="text" id="searchQuery" placeholder="Enter your search query...">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+        <div class="tab-content">
+            <iframe name="searchFrame" id="searchFrame" class="hidden"></iframe>
+        </div>
     </div>
+
+    <script>
+        function performSearch() {
+            const siteSelect = document.getElementById('siteSelect');
+            const searchQuery = document.getElementById('searchQuery').value;
+            const searchUrl = siteSelect.value + encodeURIComponent(searchQuery);
+
+            const iframe = document.getElementById('searchFrame');
+
+            // Fade out the iframe to prevent flickering during source update
+            iframe.classList.add('hidden');
+
+            // Update the iframe source
+            iframe.src = searchUrl;
+
+            // Wait for the iframe to reload before making it visible again
+            iframe.onload = () => {
+                iframe.classList.remove('hidden');
+                iframe.classList.add('visible');
+            };
+
+            return false; // Prevent form submission
+        }
+    </script>
 </body>
 </html>
